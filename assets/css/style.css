@@ -18,20 +18,3 @@ body {
 }
 
 /*--------------------*/
-
-.wrapper {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-main.main {
-    flex: 1 1 auto;
-}
-
-
-/*header*/
-
-ul.social-icons {
-    list-style: none;
-}
