@@ -1,5 +1,11 @@
+:root {
+    --bg-color: #f5f5f5;
+    --text-color: #6c757d;
+    --accent-color: #ffd333;
+    --contrast-color: #ffd333;
 
-/*--------------------*/
+}
+
 html, body {
     height: 100%;
 }
@@ -7,7 +13,11 @@ html, body {
 body {
     min-width: 320px;
     font-family: "Roboto", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
+
+/*--------------------*/
 
 .wrapper {
     min-height: 100%;
@@ -17,4 +27,11 @@ body {
 
 main.main {
     flex: 1 1 auto;
+}
+
+
+/*header*/
+
+ul.social-icons {
+    list-style: none;
 }
