@@ -45,9 +45,10 @@ function addRow() {
   
     row.cells[3].textContent = totalAmount.toFixed(2);
     updateTotal();
+    updateTotalCell();
   }
   
-  // Функция для обновления общей суммы
+  // Функция для обновления общего дохода
   function updateTotal() {
     var total = 0;
     var tbody = document.querySelector('tbody');
@@ -60,6 +61,21 @@ function addRow() {
       }
     });
   
-    document.getElementById('total').textContent = 'Общая сумма: $' + total.toFixed(2);
+    document.getElementById('total').textContent = 'Общий доход: $' + total.toFixed(2);
   }
   
+  // Функция для обновления общей суммы
+  function updateTotalCell() {
+    var total = 0;
+    var tbody = document.querySelector('tbody');
+    var rows = tbody.querySelectorAll('tr');
+  
+    rows.forEach(function(row) {
+      var totalCell = row.cells[2];
+      if (totalCell.textContent) {
+        total += parseFloat(totalCell.textContent);
+      }
+    });
+  
+    document.getElementById('totalCell').textContent = 'Общий: $' + total.toFixed(2);
+  }
