@@ -28,6 +28,7 @@ function deleteRow(button) {
     setTimeout(function () {
         row.remove();
         updateTotal();
+        updateTotalCell();
     }, 500);
 
 }
