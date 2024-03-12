@@ -31,7 +31,7 @@ function deleteRow(button) {
     }, 500);
         var rows = tbody.querySelectorAll('tr');
 rows.forEach(function(row, index) {
-row.firstElementChild.textContent = index + 1;
+rows.firstElementChild.textContent = index + 1;
 
 });
         updateTotal();
