@@ -27,10 +27,10 @@ function deleteRow(button) {
     row.classList.add('fade-out');
     setTimeout(function () {
         row.remove();
+        
+    }, 500);
         updateTotal();
         updateTotalCell();
-    }, 500);
-
 }
 
 // Функция для обновления строки таблицы
