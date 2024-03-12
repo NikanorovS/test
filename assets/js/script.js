@@ -29,11 +29,6 @@ function deleteRow(button) {
         row.remove();
         
     }, 500);
-        var rows = tbody.querySelectorAll('tr');
-rows.forEach(function(row, index) {
-rows.firstElementChild.textContent = index + 1;
-
-});
         updateTotal();
         updateTotalCell();
 }
