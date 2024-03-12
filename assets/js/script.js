@@ -14,68 +14,77 @@ function addRow() {
         <button class="btn btn-danger" onclick="deleteRow(this)">-</button>
       </td>
     `;
+    newRow.classList.add('fade-in');
     tbody.appendChild(newRow);
-  }
-  
-  // Функция для удаления строки из таблицы
-  function deleteRow(button) {
+    setTimeout(function () {
+        newRow.classList.add('active');
+    }, 10);
+}
+
+// Функция для удаления строки из таблицы
+function deleteRow(button) {
     var row = button.closest('tr');
-    row.remove();
-    updateTotal();
-  }
-  
-  // Функция для обновления строки таблицы
-  function updateRow(cell) {
+    row.classList.add('fade-out');
+    setTimeout(function () {
+        row.remove();
+        updateTotal();
+    }, 500);
+
+}
+
+// Функция для обновления строки таблицы
+function updateRow(cell) {
     var row = cell.closest('tr');
     var startPrice = parseInt(row.cells[1].textContent.trim());
     var amount = parseInt(row.cells[2].textContent.trim());
     var totalAmount;
-  
+
     if (amount <= 400) {
-      totalAmount = (amount - startPrice) * 0.06;
+        totalAmount = (amount - startPrice) * 0.06;
     } else if (amount >= 401 && amount <= 599) {
-      totalAmount = (amount - startPrice) * 0.08;
+        totalAmount = (amount - startPrice) * 0.08;
     } else if (amount >= 600 && amount <= 899) {
-      totalAmount = (amount - startPrice) * 0.12;
+        totalAmount = (amount - startPrice) * 0.12;
     } else if (amount >= 900 && amount <= 1399) {
-      totalAmount = (amount - startPrice) * 0.14;
+        totalAmount = (amount - startPrice) * 0.14;
     } else {
-      totalAmount = (amount - startPrice) * 0.16;
+        totalAmount = (amount - startPrice) * 0.16;
     }
-  
+
     row.cells[3].textContent = totalAmount.toFixed(2);
     updateTotal();
     updateTotalCell();
-  }
-  
-  // Функция для обновления общего дохода
-  function updateTotal() {
+}
+
+// Функция для обновления общего дохода
+function updateTotal() {
     var total = 0;
     var tbody = document.querySelector('tbody');
     var rows = tbody.querySelectorAll('tr');
-  
-    rows.forEach(function(row) {
-      var totalCell = row.cells[3];
-      if (totalCell.textContent) {
-        total += parseFloat(totalCell.textContent);
-      }
+
+    rows.forEach(function (row) {
+        var totalCell = row.cells[3];
+        if (totalCell.textContent) {
+            total += parseFloat(totalCell.textContent);
+        }
     });
-  
+
     document.getElementById('total').textContent = 'Общий доход: $' + total.toFixed(2);
-  }
-  
-  // Функция для обновления общей суммы
-  function updateTotalCell() {
+}
+
+// Функция для обновления общей суммы
+function updateTotalCell() {
     var total = 0;
     var tbody = document.querySelector('tbody');
     var rows = tbody.querySelectorAll('tr');
-  
-    rows.forEach(function(row) {
-      var totalCell = row.cells[2];
-      if (totalCell.textContent) {
-        total += parseFloat(totalCell.textContent);
-      }
+
+    rows.forEach(function (row) {
+        var totalCell = row.cells[2];
+        if (totalCell.textContent) {
+            total += parseFloat(totalCell.textContent);
+        }
     });
-  
+
     document.getElementById('totalCell').textContent = 'Общий: $' + total.toFixed(2);
-  }
+}
+
