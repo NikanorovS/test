@@ -19,6 +19,7 @@ function addRow() {
     setTimeout(function () {
         newRow.classList.add('active');
     }, 10);
+calculateAverage();
 }
 
 // Функция для удаления строки из таблицы
@@ -31,6 +32,7 @@ function deleteRow(button) {
         updateRowNumbers(tbody); // Обновление номеров строк после удаления
         updateTotal();
         updateTotalCell();
+calculateAverage();
     }, 500);
 }
 
@@ -63,6 +65,7 @@ function updateRow(cell) {
     row.cells[3].textContent = totalAmount.toFixed(2);
     updateTotal();
     updateTotalCell();
+calculateAverage();
 }
 
 // Функция для обновления общего дохода
@@ -96,4 +99,25 @@ function updateTotalCell() {
 
     document.getElementById('totalCell').textContent = 'Общий: $' + total.toFixed(2);
 }
+
+function calculateAverage() {
+    var total = 0;
+    var count = 0;
+    var tbody = document.querySelector('tbody');
+    var rows = tbody.querySelectorAll('tr');
+
+    rows.forEach(function (row) {
+        var value = parseFloat(row.cells[2].textContent);
+        if (!isNaN(value)) {
+            total += value;
+            count++;
+        }
+    });
+
+    var average = count > 0 ? total / count : 0;
+    var averageDisplay = document.getElementById('averagePrice');
+    averageDisplay.textContent = 'Средний чек: $' + average.toFixed(2);
+}
+
+// Вызовите эту функцию после добавления или удаления строки, чтобы обновить средний чек
 
