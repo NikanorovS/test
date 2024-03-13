@@ -97,7 +97,7 @@ function updateTotalCell() {
         }
     });
 
-    document.getElementById('totalCell').textContent = 'Общий: $' + total.toFixed(2);
+    document.getElementById('totalCell').textContent = 'Общиая сумма: $' + total.toFixed(2);
 }
 
 function calculateAverage() {
