@@ -6,8 +6,8 @@ function addRow() {
     var newRow = document.createElement('tr');
     newRow.innerHTML = `
       <th scope="row">${newRowNumber}</th>
-      <td contenteditable="true" onblur="updateRow(this)">0</td>
-      <td contenteditable="true" onblur="updateRow(this)">0</td>
+      <td contenteditable="true" onblur="updateRow(this)"></td>
+      <td contenteditable="true" onblur="updateRow(this)"></td>
       <td></td>
       <td>
         <button class="btn btn-success" onclick="addRow()">+</button>
@@ -119,5 +119,4 @@ function calculateAverage() {
     averageDisplay.textContent = 'Средний чек: $' + average.toFixed(2);
 }
 
-// Вызовите эту функцию после добавления или удаления строки, чтобы обновить средний чек
 
