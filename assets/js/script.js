@@ -1,4 +1,4 @@
-// Функция для добавления строки в таблицу
+/// Функция для добавления строки в таблицу
 function addRow() {
     var tbody = document.querySelector('tbody');
     var lastRow = tbody.lastElementChild;
@@ -19,7 +19,9 @@ function addRow() {
     setTimeout(function () {
         newRow.classList.add('active');
     }, 10);
-calculateAverage();
+
+    // После добавления строки вызываем обновление среднего чека
+    calculateAverage();
 }
 
 // Функция для удаления строки из таблицы
@@ -33,8 +35,9 @@ function deleteRow(button) {
         updateTotal();
         updateTotalCell();
 
+        // После удаления строки вызываем обновление среднего чека
+        calculateAverage();
     }, 500);
-calculateAverage();
 }
 
 function updateRowNumbers(tbody) {
