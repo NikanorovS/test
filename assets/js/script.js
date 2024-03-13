@@ -32,8 +32,9 @@ function deleteRow(button) {
         updateRowNumbers(tbody); // Обновление номеров строк после удаления
         updateTotal();
         updateTotalCell();
-calculateAverage();
+
     }, 500);
+calculateAverage();
 }
 
 function updateRowNumbers(tbody) {
