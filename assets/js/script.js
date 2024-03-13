@@ -24,13 +24,21 @@ function addRow() {
 // Функция для удаления строки из таблицы
 function deleteRow(button) {
     var row = button.closest('tr');
+    var tbody = row.parentNode;
     row.classList.add('fade-out');
     setTimeout(function () {
         row.remove();
-        
-    }, 500);
+        updateRowNumbers(tbody); // Обновление номеров строк после удаления
         updateTotal();
         updateTotalCell();
+    }, 500);
+}
+
+function updateRowNumbers(tbody) {
+    var rows = tbody.querySelectorAll('tr');
+    rows.forEach(function (row, index) {
+        row.querySelector('th').textContent = index + 1;
+    });
 }
 
 // Функция для обновления строки таблицы
