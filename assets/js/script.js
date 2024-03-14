@@ -1,3 +1,5 @@
+'use strict'
+
 // Функция для добавления строки в таблицу
 function addRow() {
     var tbody = document.querySelector('tbody');
