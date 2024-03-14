@@ -4,14 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
     setCurrentDate();
 
     // Находим кнопки "Добавить" и "Удалить" и добавляем прослушиватели событий
-    var addButton = document.querySelector('.btn-success');
-    var deleteButton = document.querySelector('.btn-danger');
+    var addButton = document.getElementById('addRowButton');
+    var deleteButton = document.getElementById('deleteRowButton');
 
     addButton.addEventListener('click', addRow);
     deleteButton.addEventListener('click', function () {
         deleteRow(this);
     });
-
 
     // Функция для добавления строки в таблицу
     function addRow() {
@@ -21,12 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
         var newRow = document.createElement('tr');
         newRow.innerHTML = `
           <th scope="row">${newRowNumber}</th>
-          <td contenteditable="true" onblur="updateRow(this)"></td>
-          <td contenteditable="true" onblur="updateRow(this)"></td>
+          <td contenteditable="true" id="startPrice"></td>
+          <td contenteditable="true" id="amount"></td>
           <td></td>
           <td>
-            <button class="btn btn-success" onclick="addRow()">+</button>
-            <button class="btn btn-danger" onclick="deleteRow(this)">-</button>
+            <button class="btn btn-success" id="addRowButton">+</button>
+            <button class="btn btn-danger" id="deleteRowButton">-</button>
           </td>
         `;
         newRow.classList.add('fade-in');
@@ -66,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var startPrice = parseInt(row.querySelector('#startPrice').textContent.trim());
         var amount = parseInt(row.querySelector('#amount').textContent.trim());
         var totalAmount;
-    
+
         if (amount <= 400) {
             totalAmount = (amount - startPrice) * 0.06;
         } else if (amount >= 401 && amount <= 599) {
@@ -78,13 +77,12 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             totalAmount = (amount - startPrice) * 0.16;
         }
-    
+
         row.cells[3].textContent = totalAmount.toFixed(2);
         updateTotal();
         updateTotalCell();
         calculateAverage();
     }
-    
 
     // Функция для обновления общего дохода
     function updateTotal() {
