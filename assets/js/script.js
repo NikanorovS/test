@@ -3,52 +3,49 @@ import { setCurrentDate } from "../js/dateModule.js";
 document.addEventListener("DOMContentLoaded", function () {
     setCurrentDate();
 
-    // Находим кнопки "Добавить" и "Удалить" и добавляем прослушиватели событий
-    var addButton = document.getElementById('addRowButton');
-    var deleteButton = document.getElementById('deleteRowButton');
+    var addButton = document.querySelector('.addRowButton');
+    var deleteButton = document.querySelector('.deleteRowButton');
 
     addButton.addEventListener('click', addRow);
     deleteButton.addEventListener('click', function () {
         deleteRow(this);
     });
 
-    // Функция для добавления строки в таблицу
     function addRow() {
-        var tbody = document.querySelector('tbody');
+        var tbody = document.getElementById('orderTableBody');
         var lastRow = tbody.lastElementChild;
         var newRowNumber = parseInt(lastRow.firstElementChild.textContent) + 1;
         var newRow = document.createElement('tr');
         newRow.innerHTML = `
           <th scope="row">${newRowNumber}</th>
-          <td contenteditable="true" id="startPrice"></td>
-          <td contenteditable="true" id="amount"></td>
+          <td contenteditable="true" class="startPrice"></td>
+          <td contenteditable="true" class="amount"></td>
           <td></td>
           <td>
-            <button class="btn btn-success" id="addRowButton">+</button>
-            <button class="btn btn-danger" id="deleteRowButton">-</button>
+            <button class="btn btn-success addRowButton">+</button>
+            <button class="btn btn-danger deleteRowButton">-</button>
           </td>
         `;
         newRow.classList.add('fade-in');
         tbody.appendChild(newRow);
         setTimeout(function () {
             newRow.classList.add('active');
-            calculateAverage(); // Вызываем функцию после добавления строки
+            calculateAverage();
             updateTotal();
             updateTotalCell();
         }, 10);
     }
 
-    // Функция для удаления строки из таблицы
     function deleteRow(button) {
         var row = button.closest('tr');
         var tbody = row.parentNode;
         row.classList.add('fade-out');
         setTimeout(function () {
             row.remove();
-            updateRowNumbers(tbody); // Обновление номеров строк после удаления
+            updateRowNumbers(tbody);
             updateTotal();
             updateTotalCell();
-            calculateAverage(); // Вызываем функцию после удаления строки
+            calculateAverage();
         }, 500);
     }
 
@@ -59,11 +56,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Функция для обновления строки таблицы
     function updateRow() {
         var row = this.closest('tr');
-        var startPrice = parseInt(row.querySelector('#startPrice').textContent.trim());
-        var amount = parseInt(row.querySelector('#amount').textContent.trim());
+        var startPrice = parseInt(row.querySelector('.startPrice').textContent.trim());
+        var amount = parseInt(row.querySelector('.amount').textContent.trim());
         var totalAmount;
 
         if (amount <= 400) {
@@ -84,10 +80,9 @@ document.addEventListener("DOMContentLoaded", function () {
         calculateAverage();
     }
 
-    // Функция для обновления общего дохода
     function updateTotal() {
         var total = 0;
-        var tbody = document.querySelector('tbody');
+        var tbody = document.getElementById('orderTableBody');
         var rows = tbody.querySelectorAll('tr');
 
         rows.forEach(function (row) {
@@ -100,10 +95,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('total').textContent = 'Общий доход: $' + total.toFixed(2);
     }
 
-    // Функция для обновления общей суммы
     function updateTotalCell() {
         var total = 0;
-        var tbody = document.querySelector('tbody');
+        var tbody = document.getElementById('orderTableBody');
         var rows = tbody.querySelectorAll('tr');
 
         rows.forEach(function (row) {
@@ -119,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function calculateAverage() {
         var total = 0;
         var count = 0;
-        var tbody = document.querySelector('tbody');
+        var tbody = document.getElementById('orderTableBody');
         var rows = tbody.querySelectorAll('tr');
 
         rows.forEach(function (row) {
