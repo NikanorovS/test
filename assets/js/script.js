@@ -147,3 +147,4 @@ document.addEventListener("DOMContentLoaded", function () {
     // Обновляем содержимое элемента с текущей датой
     currentDateElement.textContent += formattedDate;
 });
+
