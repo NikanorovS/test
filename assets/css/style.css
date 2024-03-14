@@ -3,7 +3,7 @@
 
 @keyframes flash {
     0% { color: inherit; }
-    50% { color: var(--accent-color); font-size: 17px; }
+    50% { color: var(--accent-color); font-size: 18px; }
     100% { color: inherit; font-size: 16px; }
 }
 
