@@ -3,6 +3,16 @@ import { setCurrentDate } from "../js/dateModule.js";
 document.addEventListener("DOMContentLoaded", function () {
     setCurrentDate();
 
+    // Находим кнопки "Добавить" и "Удалить" и добавляем прослушиватели событий
+    var addButton = document.querySelector('.btn-success');
+    var deleteButton = document.querySelector('.btn-danger');
+
+    addButton.addEventListener('click', addRow);
+    deleteButton.addEventListener('click', function () {
+        deleteRow(this);
+    });
+
+
     // Функция для добавления строки в таблицу
     function addRow() {
         var tbody = document.querySelector('tbody');
@@ -125,4 +135,5 @@ document.addEventListener("DOMContentLoaded", function () {
         var averageDisplay = document.getElementById('averagePrice');
         averageDisplay.textContent = 'Средний чек: $' + average.toFixed(2);
     }
+
 });
