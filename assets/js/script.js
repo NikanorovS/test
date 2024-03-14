@@ -117,8 +117,7 @@ function updateTotalCell() {
     }
 }
 
-
-
+// Функция для обновления среднего чека
 function calculateAverage() {
     var total = 0;
     var count = 0;
@@ -138,7 +137,7 @@ function calculateAverage() {
     averageDisplay.textContent = 'Средний чек: $' + average.toFixed(2);
 }
 
-
+//Дата
 document.addEventListener("DOMContentLoaded", function () {
 
     // Находим элемент с id "currentDate"
