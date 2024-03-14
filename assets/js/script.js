@@ -1,10 +1,8 @@
-import { setCurrentDate } from "../js/dateModule.js";
-
 document.addEventListener("DOMContentLoaded", function () {
     setCurrentDate();
 
     // Находим кнопку "Добавить" и добавляем прослушиватель событий
-    var addButton = document.querySelector('.addRowButton');
+    var addButton = document.querySelector('#addRowButton');
     addButton.addEventListener('click', addRow);
 
     function addRow() {
