@@ -1,111 +1,145 @@
-document.addEventListener("DOMContentLoaded", function () {
-    setCurrentDate();
+// Функция для добавления строки в таблицу
+function addRow() {
+    var tbody = document.querySelector('tbody');
+    var lastRow = tbody.lastElementChild;
+    var newRowNumber = parseInt(lastRow.firstElementChild.textContent) + 1;
+    var newRow = document.createElement('tr');
+    newRow.innerHTML = `
+      <th scope="row">${newRowNumber}</th>
+      <td contenteditable="true" onblur="updateRow(this)"></td>
+      <td contenteditable="true" onblur="updateRow(this)"></td>
+      <td></td>
+      <td>
+        <button class="btn btn-success" onclick="addRow()">+</button>
+        <button class="btn btn-danger" onclick="deleteRow(this)">-</button>
+      </td>
+    `;
+    newRow.classList.add('fade-in');
+    tbody.appendChild(newRow);
+    setTimeout(function () {
+        newRow.classList.add('active');
+        calculateAverage(); // Вызываем функцию после добавления строки
+    }, 10);
+}
 
-    // Находим кнопку "Добавить" и добавляем прослушиватель событий
-    var addButton = document.querySelector('#addRowButton');
-    addButton.addEventListener('click', addRow);
+// Функция для удаления строки из таблицы
+function deleteRow(button) {
+    var row = button.closest('tr');
+    var tbody = row.parentNode;
+    row.classList.add('fade-out');
+    setTimeout(function () {
+        row.remove();
+        updateRowNumbers(tbody); // Обновление номеров строк после удаления
+        updateTotal();
+        updateTotalCell();
+        calculateAverage(); // Вызываем функцию после удаления строки
+    }, 500);
+}
 
-    function addRow() {
-        var tbody = document.getElementById('orderTableBody');
-        var lastRow = tbody.lastElementChild;
-        var newRowNumber = parseInt(lastRow.firstElementChild.textContent) + 1;
-        var newRow = document.createElement('tr');
-        newRow.innerHTML = `
-          <th scope="row">${newRowNumber}</th>
-          <td contenteditable="true" class="startPrice"></td>
-          <td contenteditable="true" class="amount"></td>
-          <td></td>
-          <td>
-            <button class="btn btn-success addRowButton">+</button>
-            <button class="btn btn-danger deleteRowButton">-</button>
-          </td>
-        `;
-        newRow.classList.add('fade-in');
-        tbody.appendChild(newRow);
+function updateRowNumbers(tbody) {
+    var rows = tbody.querySelectorAll('tr');
+    rows.forEach(function (row, index) {
+        row.querySelector('th').textContent = index + 1;
+    });
+}
 
-        // Находим кнопки в добавленной строке и назначаем им обработчики событий
-        var addButtons = document.querySelectorAll('.addRowButton');
-        var deleteButtons = document.querySelectorAll('.deleteRowButton');
-        addButtons.forEach(button => button.addEventListener('click', addRow));
-        deleteButtons.forEach(button => button.addEventListener('click', function () {
-            deleteRow(this);
-        }));
+// Функция для обновления строки таблицы
+function updateRow(cell) {
+    var row = cell.closest('tr');
+    var startPrice = parseInt(row.cells[1].textContent.trim());
+    var amount = parseInt(row.cells[2].textContent.trim());
+    var totalAmount;
 
-        setTimeout(function () {
-            newRow.classList.add('active');
-            calculateAverage();
-            updateTotal();
-            updateTotalCell();
-        }, 10);
+    if (amount <= 400) {
+        totalAmount = (amount - startPrice) * 0.06;
+    } else if (amount >= 401 && amount <= 599) {
+        totalAmount = (amount - startPrice) * 0.08;
+    } else if (amount >= 600 && amount <= 899) {
+        totalAmount = (amount - startPrice) * 0.12;
+    } else if (amount >= 900 && amount <= 1399) {
+        totalAmount = (amount - startPrice) * 0.14;
+    } else {
+        totalAmount = (amount - startPrice) * 0.16;
     }
 
-    function deleteRow(button) {
-        var row = button.closest('tr');
-        var tbody = row.parentNode;
-        row.classList.add('fade-out');
-        setTimeout(function () {
-            row.remove();
-            updateRowNumbers(tbody);
-            updateTotal();
-            updateTotalCell();
-            calculateAverage();
-        }, 500);
+    row.cells[3].textContent = totalAmount.toFixed(2);
+    updateTotal();
+    updateTotalCell();
+    calculateAverage();
+}
+
+// Функция для обновления общего дохода
+function updateTotal() {
+    var total = 0;
+    var tbody = document.querySelector('tbody');
+    var rows = tbody.querySelectorAll('tr');
+
+    rows.forEach(function (row) {
+        var totalCell = row.cells[3];
+        if (totalCell.textContent) {
+            total += parseFloat(totalCell.textContent);
+        }
+    });
+
+    document.getElementById('total').textContent = 'Общий доход: $' + total.toFixed(2);
+}
+
+// Функция для обновления общей суммы
+function updateTotalCell() {
+    var total = 0;
+    var tbody = document.querySelector('tbody');
+    var rows = tbody.querySelectorAll('tr');
+
+    rows.forEach(function (row) {
+        var totalCell = row.cells[2];
+        if (totalCell.textContent) {
+            total += parseFloat(totalCell.textContent);
+        }
+    });
+
+    document.getElementById('totalCell').textContent = 'Общая сумма: $' + total.toFixed(2);
+}
+
+function calculateAverage() {
+    var total = 0;
+    var count = 0;
+    var tbody = document.querySelector('tbody');
+    var rows = tbody.querySelectorAll('tr');
+
+    rows.forEach(function (row) {
+        var value = parseFloat(row.cells[2].textContent);
+        if (!isNaN(value)) {
+            total += value;
+            count++;
+        }
+    });
+
+    var average = count > 0 ? total / count : 0;
+    var averageDisplay = document.getElementById('averagePrice');
+    averageDisplay.textContent = 'Средний чек: $' + average.toFixed(2);
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // Находим элемент с id "currentDate"
+    var currentDateElement = document.getElementById('currentDate');
+
+    // Создаем объект даты с текущей датой и временем
+    var currentDate = new Date();
+
+    // Получаем компоненты даты (день, месяц, год)
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1; // Месяцы начинаются с 0, поэтому добавляем 1
+    var year = currentDate.getFullYear();
+
+    if (month < 10) {
+        month = '0' + month;
     }
 
-    function updateRowNumbers(tbody) {
-        var rows = tbody.querySelectorAll('tr');
-        rows.forEach(function (row, index) {
-            row.querySelector('th').textContent = index + 1;
-        });
-    }
+    // Форматируем компоненты даты в строку
+    var formattedDate = day + '.' + month + '.' + year;
 
-    function updateTotal() {
-        var total = 0;
-        var tbody = document.getElementById('orderTableBody');
-        var rows = tbody.querySelectorAll('tr');
-
-        rows.forEach(function (row) {
-            var totalCell = row.cells[3];
-            if (totalCell.textContent) {
-                total += parseFloat(totalCell.textContent);
-            }
-        });
-
-        document.getElementById('total').textContent = 'Общий доход: $' + total.toFixed(2);
-    }
-
-    function updateTotalCell() {
-        var total = 0;
-        var tbody = document.getElementById('orderTableBody');
-        var rows = tbody.querySelectorAll('tr');
-
-        rows.forEach(function (row) {
-            var totalCell = row.cells[2];
-            if (totalCell.textContent) {
-                total += parseFloat(totalCell.textContent);
-            }
-        });
-
-        document.getElementById('totalCell').textContent = 'Общая сумма: $' + total.toFixed(2);
-    }
-
-    function calculateAverage() {
-        var total = 0;
-        var count = 0;
-        var tbody = document.getElementById('orderTableBody');
-        var rows = tbody.querySelectorAll('tr');
-
-        rows.forEach(function (row) {
-            var value = parseFloat(row.cells[2].textContent);
-            if (!isNaN(value)) {
-                total += value;
-                count++;
-            }
-        });
-
-        var average = count > 0 ? total / count : 0;
-        var averageDisplay = document.getElementById('averagePrice');
-        averageDisplay.textContent = 'Средний чек: $' + average.toFixed(2);
-    }
-
+    // Обновляем содержимое элемента с текущей датой
+    currentDateElement.textContent += formattedDate;
 });

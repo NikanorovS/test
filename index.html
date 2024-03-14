@@ -7,48 +7,51 @@
     <title>test</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="shortcut icon" href="./assets/icon/favicon.ico" type="image/x-icon">
+
 </head>
 
 <body>
+
     <div class="container">
         <h2>Заказы</h2>
         <p id="currentDate">Текущая дата: </p>
         <table class="table table-hover table-striped table-dark table-borderless">
-            <thead>
-                <tr class="table-dark">
-                    <th scope="col">#</th>
-                    <th scope="col">Старт цена</th>
-                    <th scope="col">Сумма</th>
-                    <th scope="col">Доход с заказа</th>
-                    <th scope="col">Действия</th>
-                </tr>
-            </thead>
-            <tbody id="orderTableBody">
-                <tr>
-                    <th scope="row">1</th>
-                    <td contenteditable="true" class="startPrice"></td>
-                    <td contenteditable="true" class="amount"></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-success" id="addRowButton">+</button>
-                        <button class="btn btn-danger" id="deleteRowButton">-</button>
-                    </td>
-                </tr>
-            </tbody>
+          <thead>
+            <tr class="table-dark">
+              <th scope="col">#</th>
+              <th scope="col">Старт цена</th>
+              <th scope="col">Сумма</th>
+              <th scope="col">Доход с заказа</th>
+              <th scope="col">Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td contenteditable="true" onblur="updateRow(this)"></td>
+              <td contenteditable="true" onblur="updateRow(this)"></td>
+              <td></td>
+              <td>
+                <button class="btn btn-success" onclick="addRow()">+</button>
+                <button class="btn btn-danger" onclick="deleteRow(this)">-</button>
+              </td>
+            </tr>
+          </tbody>
         </table>
         <h5 id="total"></h5>
         <h5 id="totalCell"></h5>
-        <h5 id="averagePrice"></h5>
-    </div>
-
+        <h5 id="averagePrice"></h5> 
+      </div>
+    
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="./assets/js/script.js"></script>
-    <script type="module" src="./assets/js/dateModule.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
