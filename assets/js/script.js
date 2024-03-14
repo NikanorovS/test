@@ -65,7 +65,7 @@ function updateRow(cell) {
     row.cells[3].textContent = totalAmount.toFixed(2);
     updateTotal();
     updateTotalCell();
-calculateAverage();
+    calculateAverage();
 }
 
 // Функция для обновления общего дохода
@@ -120,3 +120,26 @@ function calculateAverage() {
 }
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // Находим элемент с id "currentDate"
+    var currentDateElement = document.getElementById('currentDate');
+
+    // Создаем объект даты с текущей датой и временем
+    var currentDate = new Date();
+
+    // Получаем компоненты даты (день, месяц, год)
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1; // Месяцы начинаются с 0, поэтому добавляем 1
+    var year = currentDate.getFullYear();
+
+    if (month < 10) {
+        month = '0' + month;
+    }
+
+    // Форматируем компоненты даты в строку
+    var formattedDate = day + '.' + month + '.' + year;
+
+    // Обновляем содержимое элемента с текущей датой
+    currentDateElement.textContent += formattedDate;
+});
