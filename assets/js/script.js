@@ -3,13 +3,9 @@ import { setCurrentDate } from "../js/dateModule.js";
 document.addEventListener("DOMContentLoaded", function () {
     setCurrentDate();
 
+    // Находим кнопку "Добавить" и добавляем прослушиватель событий
     var addButton = document.querySelector('.addRowButton');
-    var deleteButton = document.querySelector('.deleteRowButton');
-
     addButton.addEventListener('click', addRow);
-    deleteButton.addEventListener('click', function () {
-        deleteRow(this);
-    });
 
     function addRow() {
         var tbody = document.getElementById('orderTableBody');
@@ -28,6 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
         newRow.classList.add('fade-in');
         tbody.appendChild(newRow);
+
+        // Находим кнопки в добавленной строке и назначаем им обработчики событий
+        var addButtons = document.querySelectorAll('.addRowButton');
+        var deleteButtons = document.querySelectorAll('.deleteRowButton');
+        addButtons.forEach(button => button.addEventListener('click', addRow));
+        deleteButtons.forEach(button => button.addEventListener('click', function () {
+            deleteRow(this);
+        }));
+
         setTimeout(function () {
             newRow.classList.add('active');
             calculateAverage();
@@ -54,30 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
         rows.forEach(function (row, index) {
             row.querySelector('th').textContent = index + 1;
         });
-    }
-
-    function updateRow() {
-        var row = this.closest('tr');
-        var startPrice = parseInt(row.querySelector('.startPrice').textContent.trim());
-        var amount = parseInt(row.querySelector('.amount').textContent.trim());
-        var totalAmount;
-
-        if (amount <= 400) {
-            totalAmount = (amount - startPrice) * 0.06;
-        } else if (amount >= 401 && amount <= 599) {
-            totalAmount = (amount - startPrice) * 0.08;
-        } else if (amount >= 600 && amount <= 899) {
-            totalAmount = (amount - startPrice) * 0.12;
-        } else if (amount >= 900 && amount <= 1399) {
-            totalAmount = (amount - startPrice) * 0.14;
-        } else {
-            totalAmount = (amount - startPrice) * 0.16;
-        }
-
-        row.cells[3].textContent = totalAmount.toFixed(2);
-        updateTotal();
-        updateTotalCell();
-        calculateAverage();
     }
 
     function updateTotal() {
