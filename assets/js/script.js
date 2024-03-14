@@ -20,6 +20,8 @@ function addRow() {
     tbody.appendChild(newRow);
     setTimeout(function () {
         newRow.classList.add('active');
+        updateTotal();
+        updateTotalCell();
         calculateAverage(); // Вызываем функцию после добавления строки
     }, 10);
 }
@@ -122,8 +124,8 @@ function calculateAverage() {
 }
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    
+document.addEventListener("DOMContentLoaded", function () {
+
     // Находим элемент с id "currentDate"
     var currentDateElement = document.getElementById('currentDate');
 
