@@ -61,12 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Функция для обновления строки таблицы
-    function updateRow(cell) {
-        var row = cell.closest('tr');
-        var startPrice = parseInt(row.cells[1].textContent.trim());
-        var amount = parseInt(row.cells[2].textContent.trim());
+    function updateRow() {
+        var row = this.closest('tr');
+        var startPrice = parseInt(row.querySelector('#startPrice').textContent.trim());
+        var amount = parseInt(row.querySelector('#amount').textContent.trim());
         var totalAmount;
-
+    
         if (amount <= 400) {
             totalAmount = (amount - startPrice) * 0.06;
         } else if (amount >= 401 && amount <= 599) {
@@ -78,12 +78,13 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             totalAmount = (amount - startPrice) * 0.16;
         }
-
+    
         row.cells[3].textContent = totalAmount.toFixed(2);
         updateTotal();
         updateTotalCell();
         calculateAverage();
     }
+    
 
     // Функция для обновления общего дохода
     function updateTotal() {
