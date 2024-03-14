@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function () {
             newRow.classList.add('active');
             calculateAverage(); // Вызываем функцию после добавления строки
+            updateTotal();
+            updateTotalCell();
         }, 10);
     }
 
