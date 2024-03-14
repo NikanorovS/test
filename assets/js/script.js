@@ -101,8 +101,23 @@ function updateTotalCell() {
         }
     });
 
-    document.getElementById('totalCell').textContent = 'Общая сумма: $' + total.toFixed(2);
+    var totalCellElement = document.getElementById('totalCell');
+    var currentTotal = parseFloat(totalCellElement.textContent.replace(/[^\d.-]/g, ''));
+    var newTotal = total.toFixed(2);
+
+    // Если новая сумма больше предыдущей, добавляем анимацию мигания
+    if (parseFloat(newTotal) > currentTotal) {
+        totalCellElement.innerHTML = 'Общая сумма: $<span class="flash">' + newTotal + '</span>';
+        setTimeout(() => {
+            var flashElement = document.querySelector('.flash');
+            flashElement.classList.remove('flash');
+        }, 1000);
+    } else {
+        totalCellElement.textContent = 'Общая сумма: $' + newTotal;
+    }
 }
+
+
 
 function calculateAverage() {
     var total = 0;
