@@ -1,5 +1,3 @@
-'use strict'
-
 // Функция для добавления строки в таблицу
 function addRow() {
     var tbody = document.querySelector('tbody');
@@ -20,8 +18,6 @@ function addRow() {
     tbody.appendChild(newRow);
     setTimeout(function () {
         newRow.classList.add('active');
-        updateTotal();
-        updateTotalCell();
         calculateAverage(); // Вызываем функцию после добавления строки
     }, 10);
 }
@@ -101,23 +97,9 @@ function updateTotalCell() {
         }
     });
 
-    var totalCellElement = document.getElementById('totalCell');
-    var currentTotal = parseFloat(totalCellElement.textContent.replace(/[^\d.-]/g, ''));
-    var newTotal = total.toFixed(2);
-
-    // Если новая сумма больше предыдущей, добавляем анимацию мигания
-    if (parseFloat(newTotal) > currentTotal) {
-        totalCellElement.innerHTML = 'Общая сумма: $<span class="flash">' + newTotal + '</span>';
-        setTimeout(() => {
-            var flashElement = document.querySelector('.flash');
-            flashElement.classList.remove('flash');
-        }, 1000);
-    } else {
-        totalCellElement.textContent = 'Общая сумма: $' + newTotal;
-    }
+    document.getElementById('totalCell').textContent = 'Общая сумма: $' + total.toFixed(2);
 }
 
-// Функция для обновления среднего чека
 function calculateAverage() {
     var total = 0;
     var count = 0;
@@ -137,9 +119,9 @@ function calculateAverage() {
     averageDisplay.textContent = 'Средний чек: $' + average.toFixed(2);
 }
 
-//Дата
-document.addEventListener("DOMContentLoaded", function () {
 
+document.addEventListener("DOMContentLoaded", function() {
+    
     // Находим элемент с id "currentDate"
     var currentDateElement = document.getElementById('currentDate');
 
@@ -161,4 +143,3 @@ document.addEventListener("DOMContentLoaded", function () {
     // Обновляем содержимое элемента с текущей датой
     currentDateElement.textContent += formattedDate;
 });
-
