@@ -9,7 +9,7 @@ function addRow() {
     newRow.innerHTML = `
       <th scope="row">${newRowNumber}</th>
       <td contenteditable="true" onblur="updateRow(this)"></td>
-      <td contenteditable="true" onblur="updateRow(this)"></td>
+      <td contenteditable="true" onblur="updateRow(this)" onclick="focusCell(this)"></td>
       <td></td>
       <td>
         <button class="btn btn-success" onclick="addRow()">+</button>
@@ -22,9 +22,15 @@ function addRow() {
         newRow.classList.add('active');
         updateTotal();
         updateTotalCell();
-        calculateAverage(); // Вызываем функцию после добавления строки
+        calculateAverage();
+        focusCell(newRow.querySelector('td:nth-child(2)')); // Активуємо другий стовпчик для вводу даних
     }, 10);
 }
+
+function focusCell(cell) {
+    cell.focus();
+}
+
 
 // Функция для удаления строки из таблицы
 function deleteRow(button) {
