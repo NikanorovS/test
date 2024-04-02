@@ -159,7 +159,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (month < 10) {
         month = '0' + month;
+    }if (day < 10) {
+        day = '0' + day;
     }
+
 
     // Форматируем компоненты даты в строку
     var formattedDate = day + '.' + month + '.' + year;
