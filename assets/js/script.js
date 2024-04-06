@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-// Функция для добавления строки в таблицу
+// Функція для додавання нового рядка у таблицю
 function addRow() {
     var tbody = document.querySelector('tbody');
     var lastRow = tbody.lastElementChild;
@@ -23,29 +23,30 @@ function addRow() {
         updateTotal();
         updateTotalCell();
         calculateAverage();
-        focusCell(newRow.querySelector('td:nth-child(2)')); // Активуємо другий стовпчик для вводу даних
+        focusCell(newRow.querySelector('td:nth-child(2)'));
     }, 10);
 }
 
+// Функція для фокусування на вибраній комірці
 function focusCell(cell) {
     cell.focus();
 }
 
-
-// Функция для удаления строки из таблицы
+// Функція для видалення рядка з таблиці
 function deleteRow(button) {
     var row = button.closest('tr');
     var tbody = row.parentNode;
     row.classList.add('fade-out');
     setTimeout(function () {
         row.remove();
-        updateRowNumbers(tbody); // Обновление номеров строк после удаления
+        updateRowNumbers(tbody);
         updateTotal();
         updateTotalCell();
-        calculateAverage(); // Вызываем функцию после удаления строки
+        calculateAverage();
     }, 500);
 }
 
+// Функція для оновлення номерів рядків у таблиці
 function updateRowNumbers(tbody) {
     var rows = tbody.querySelectorAll('tr');
     rows.forEach(function (row, index) {
@@ -53,7 +54,7 @@ function updateRowNumbers(tbody) {
     });
 }
 
-// Функция для обновления строки таблицы
+// Функція для оновлення даних рядка таблиці
 function updateRow(cell) {
     var row = cell.closest('tr');
     var startPrice = parseInt(row.cells[1].textContent.trim());
@@ -78,7 +79,7 @@ function updateRow(cell) {
     calculateAverage();
 }
 
-// Функция для обновления общего дохода
+// Функція для оновлення загального доходу
 function updateTotal() {
     var total = 0;
     var tbody = document.querySelector('tbody');
@@ -94,7 +95,7 @@ function updateTotal() {
     document.getElementById('total').textContent = 'Общий доход: $' + total.toFixed(2);
 }
 
-// Функция для обновления общей суммы
+// Функція для оновлення загальної суми
 function updateTotalCell() {
     var total = 0;
     var tbody = document.querySelector('tbody');
@@ -111,7 +112,6 @@ function updateTotalCell() {
     var currentTotal = parseFloat(totalCellElement.textContent.replace(/[^\d.-]/g, ''));
     var newTotal = total.toFixed(2);
 
-    // Если новая сумма больше предыдущей, добавляем анимацию мигания
     if (parseFloat(newTotal) > currentTotal) {
         totalCellElement.innerHTML = 'Общая сумма: $<span class="flash">' + newTotal + '</span>';
         setTimeout(() => {
@@ -123,7 +123,7 @@ function updateTotalCell() {
     }
 }
 
-// Функция для обновления среднего чека
+// Функція для оновлення середнього чека
 function calculateAverage() {
     var total = 0;
     var count = 0;
@@ -143,31 +143,31 @@ function calculateAverage() {
     averageDisplay.textContent = 'Средний чек: $' + average.toFixed(2);
 }
 
-//Дата
+// Функція для генерації скріншоту сторінки та скачування його
+function downloadScreenshot() {
+    html2canvas(document.body).then(function(canvas) {
+        var link = document.createElement('a');
+        link.download = 'screenshot.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    });
+}
+
+// Функція для ініціалізації
 document.addEventListener("DOMContentLoaded", function () {
-
-    // Находим элемент с id "currentDate"
     var currentDateElement = document.getElementById('currentDate');
-
-    // Создаем объект даты с текущей датой и временем
     var currentDate = new Date();
-
-    // Получаем компоненты даты (день, месяц, год)
     var day = currentDate.getDate();
-    var month = currentDate.getMonth() + 1; // Месяцы начинаются с 0, поэтому добавляем 1
+    var month = currentDate.getMonth() + 1;
     var year = currentDate.getFullYear();
 
     if (month < 10) {
         month = '0' + month;
-    }if (day < 10) {
+    }
+    if (day < 10) {
         day = '0' + day;
     }
 
-
-    // Форматируем компоненты даты в строку
     var formattedDate = day + '.' + month + '.' + year;
-
-    // Обновляем содержимое элемента с текущей датой
     currentDateElement.textContent += formattedDate;
 });
-

@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 @keyframes flash {
@@ -11,16 +10,15 @@
     animation: flash 1.5s;
 }
 
-
 :root {
     --bg-color: #b9c1cc;
     --text-color: #6c757d;
     --accent-color: #ffd333;
     --contrast-color: #ffd333;
-
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -30,8 +28,6 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
 }
-
-/*--------------------*/
 
 .fade-in {
     opacity: 0;
@@ -51,11 +47,18 @@ body {
     opacity: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: black;
 }
 
-.table thead th, th, tr {
+.table thead th,
+th,
+tr {
     text-align: center;
 }
 
