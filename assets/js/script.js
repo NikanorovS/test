@@ -143,7 +143,7 @@ function calculateAverage() {
     averageDisplay.textContent = 'Средний чек: $' + average.toFixed(2);
 }
 
-// Функція для генерації скріншоту сторінки та скачування його
+// Функция для генерации скриншота страницы и скачивания его
 function downloadScreenshot() {
     var currentDate = new Date();
     var day = currentDate.getDate();
@@ -159,7 +159,10 @@ function downloadScreenshot() {
 
     var formattedDate = year + '-' + month + '-' + day;
 
-    html2canvas(document.body).then(function(canvas) {
+    // Используем html2canvas с параметром scrollY для захвата всего содержимого с прокруткой
+    html2canvas(document.body, {
+        scrollY: -window.scrollY
+    }).then(function(canvas) {
         var link = document.createElement('a');
         link.download = 'screenshot_' + formattedDate + '.png'; // Добавляем текущую дату в название скриншота
         link.href = canvas.toDataURL();
