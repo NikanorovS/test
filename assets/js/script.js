@@ -159,8 +159,12 @@ function downloadScreenshot() {
 
     var formattedDate = year + '-' + month + '-' + day;
 
-    // Захватываем всю видимую область страницы
-    html2canvas(document.body).then(function(canvas) {
+    // Создаем временный контейнер и копируем в него содержимое таблицы
+    var tempContainer = document.createElement('div');
+    tempContainer.appendChild(document.querySelector('.container').cloneNode(true));
+
+    // Используем html2canvas для захвата содержимого временного контейнера
+    html2canvas(tempContainer).then(function(canvas) {
         var link = document.createElement('a');
         link.download = 'screenshot_' + formattedDate + '.png'; // Добавляем текущую дату в название скриншота
         link.href = canvas.toDataURL();
