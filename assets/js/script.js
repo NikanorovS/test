@@ -145,9 +145,11 @@ function calculateAverage() {
 
 // Функція для генерації скріншоту сторінки та скачування його
 function downloadScreenshot() {
+    var currentDate = new Date();
+    var dateString = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate();
     html2canvas(document.body).then(function(canvas) {
         var link = document.createElement('a');
-        link.download = 'screenshot.png';
+        link.download = 'screenshot_' + dateString + '.png'; // Назва файлу з поточною датою
         link.href = canvas.toDataURL();
         link.click();
     });
