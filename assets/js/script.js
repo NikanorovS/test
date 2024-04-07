@@ -145,23 +145,9 @@ function calculateAverage() {
 
 // Функція для генерації скріншоту сторінки та скачування його
 function downloadScreenshot() {
-    var currentDate = new Date();
-    var day = currentDate.getDate();
-    var month = currentDate.getMonth() + 1; // Месяцы начинаются с 0, поэтому добавляем 1
-    var year = currentDate.getFullYear();
-
-    if (month < 10) {
-        month = '0' + month; // Добавляем ведущий ноль, если месяц меньше 10
-    }
-    if (day < 10) {
-        day = '0' + day; // Добавляем ведущий ноль, если день меньше 10
-    }
-
-    var formattedDate = year + '-' + month + '-' + day;
-
     html2canvas(document.body).then(function(canvas) {
         var link = document.createElement('a');
-        link.download = 'screenshot_' + formattedDate + '.png'; // Добавляем текущую дату в название скриншота
+        link.download = 'screenshot.png';
         link.href = canvas.toDataURL();
         link.click();
     });
@@ -176,4 +162,12 @@ document.addEventListener("DOMContentLoaded", function () {
     var year = currentDate.getFullYear();
 
     if (month < 10) {
-        month = '
+        month = '0' + month;
+    }
+    if (day < 10) {
+        day = '0' + day;
+    }
+
+    var formattedDate = day + '.' + month + '.' + year;
+    currentDateElement.textContent += formattedDate;
+});
