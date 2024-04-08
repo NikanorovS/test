@@ -51,14 +51,6 @@ body {
     opacity: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: black;
-}
 
 .table thead th,
 th,
@@ -70,7 +62,12 @@ tr {
     background-color: var(--bs-table-accent-bg);
 }
 
-.saver {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6, .saver {
     color:black;
 }
 
