@@ -43,6 +43,7 @@ function deleteRow(button) {
         updateTotal();
         updateTotalCell();
         calculateAverage();
+        saveData();
     }, 500);
 }
 
@@ -77,6 +78,7 @@ function updateRow(cell) {
     updateTotal();
     updateTotalCell();
     calculateAverage();
+    saveData();
 }
 
 // Функція для оновлення загального доходу
@@ -147,12 +149,66 @@ function calculateAverage() {
 function downloadScreenshot() {
     var currentDate = new Date();
     var dateString = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate();
-    html2canvas(document.body).then(function(canvas) {
+    html2canvas(document.body).then(function (canvas) {
         var link = document.createElement('a');
         link.download = 'screenshot_' + dateString + '.png'; // Назва файлу з поточною датою
         link.href = canvas.toDataURL();
         link.click();
     });
+}
+
+// Функція для збереження даних у localStorage
+function saveData() {
+    var tableData = [];
+    var tbody = document.querySelector('tbody');
+    var rows = tbody.querySelectorAll('tr');
+
+    rows.forEach(function (row) {
+        var rowData = {
+            startPrice: row.cells[1].textContent.trim(),
+            amount: row.cells[2].textContent.trim(),
+            totalAmount: row.cells[3].textContent.trim()
+        };
+        tableData.push(rowData);
+    });
+
+    localStorage.setItem('tableData', JSON.stringify(tableData));
+}
+
+// Функція для відновлення даних з localStorage
+function restoreData() {
+    var tableData = localStorage.getItem('tableData');
+    if (tableData) {
+        tableData = JSON.parse(tableData);
+        var tbody = document.querySelector('tbody');
+        tbody.innerHTML = '';
+
+        tableData.forEach(function (rowData) {
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = `
+              <th scope="row"></th>
+              <td contenteditable="true" onblur="updateRow(this)">${rowData.startPrice}</td>
+              <td contenteditable="true" onblur="updateRow(this)" onclick="focusCell(this)">${rowData.amount}</td>
+              <td>${rowData.totalAmount}</td>
+              <td>
+                <button class="btn btn-success" onclick="addRow()">+</button>
+                <button class="btn btn-danger" onclick="deleteRow(this)">-</button>
+              </td>
+            `;
+            tbody.appendChild(newRow);
+        });
+
+        updateRowNumbers(tbody);
+        updateTotal();
+        updateTotalCell();
+        calculateAverage();
+    }
+}
+
+// Функція для скидання даних
+function resetData() {
+    localStorage.removeItem('tableData');
+    location.reload();
 }
 
 // Функція для ініціалізації
@@ -172,4 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var formattedDate = day + '.' + month + '.' + year;
     currentDateElement.textContent += formattedDate;
+
+    // Відновлення даних при завантаженні сторінки
+    restoreData();
 });
