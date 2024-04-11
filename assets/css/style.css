@@ -33,7 +33,7 @@ body {
     height: 100%;
     min-width: 320px;
     font-family: 'Noto Sans', sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     background-color: #1c1c1c;
     /* Темный фон */
     color: #fff;
@@ -108,4 +108,12 @@ body .container h2 {
 /* Увеличение размера заголовка */
 h2 {
     font-size: 28px;
+}
+
+.btn-success {
+    border-color: chartreuse;
+}
+
+.btn-danger {
+    border-color: deeppink;
 }
