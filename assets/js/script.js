@@ -157,6 +157,42 @@ function downloadScreenshot() {
     });
 }
 
+// Функция для экспорта данных в формат CSV
+function exportToCSV() {
+    var tableData = [];
+    var tbody = document.querySelector('tbody');
+    var rows = tbody.querySelectorAll('tr');
+
+    rows.forEach(function (row) {
+        var rowData = [];
+        row.querySelectorAll('td').forEach(function (cell) {
+            rowData.push(cell.textContent);
+        });
+        tableData.push(rowData.join(','));
+    });
+
+    var csvContent = 'data:text/csv;charset=utf-8,' + tableData.join('\n');
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'table_data.csv');
+    document.body.appendChild(link);
+    link.click();
+}
+
+// Функция для экспорта данных в формат Excel
+function exportToExcel() {
+    var table = document.querySelector('table');
+    var html = table.outerHTML;
+
+    var excelContent = 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(html);
+    var link = document.createElement('a');
+    link.setAttribute('href', excelContent);
+    link.setAttribute('download', 'table_data.xls');
+    document.body.appendChild(link);
+    link.click();
+}
+
 // Функція для збереження даних у localStorage
 function saveData() {
     var tableData = [];
