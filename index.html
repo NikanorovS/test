@@ -7,7 +7,9 @@
     <title>Калькулятор заказов</title>
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="shortcut icon" href="./assets/icon/usd-crypto-cryptocurrency-cryptocurrencies-cash-money-bank-payment_95405.ico" type="image/x-icon">
+    <link rel="shortcut icon"
+        href="./assets/icon/usd-crypto-cryptocurrency-cryptocurrencies-cash-money-bank-payment_95405.ico"
+        type="image/x-icon">
 </head>
 
 <body>
@@ -15,6 +17,7 @@
         <h2>Заказы</h2>
         <p id="currentDate">Текущая дата: </p>
         <hr>
+        <!-- Оставляем таблицу без изменений -->
         <table class="table table-hover table-striped table-dark table-bordered table-sm">
             <thead>
                 <tr class="table-dark">
@@ -43,6 +46,7 @@
         <h6 id="totalCell" class="flash"></h6>
         <hr>
         <h6 id="averagePrice"></h6>
+        <!-- Добавляем новые кнопки для экспорта в CSV и Excel -->
         <button class="btn saver btn-primary" onclick="downloadScreenshot()">Сохранить и скачать</button>
         <button class="btn resetter btn-secondary" onclick="resetData()">Сбросить данные</button>
         <button class="btn btn-primary" onclick="exportToCSV()">Экспорт в CSV</button>
