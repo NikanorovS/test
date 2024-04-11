@@ -185,13 +185,14 @@ function exportToExcel() {
     var table = document.querySelector('table');
     var html = table.outerHTML;
 
-    var excelContent = 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(html);
+    var excelContent = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8,' + encodeURIComponent(html);
     var link = document.createElement('a');
     link.setAttribute('href', excelContent);
     link.setAttribute('download', 'table_data.xls');
     document.body.appendChild(link);
     link.click();
 }
+
 
 // Функція для збереження даних у localStorage
 function saveData() {
