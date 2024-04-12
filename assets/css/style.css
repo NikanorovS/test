@@ -117,3 +117,7 @@ h2 {
 .btn-danger {
     border-color: deeppink;
 }
+
+#total, #totalCell, #averagePrice {
+    padding: 10px;
+}
