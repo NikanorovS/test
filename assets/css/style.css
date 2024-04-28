@@ -69,6 +69,7 @@ body {
 th,
 tr {
     text-align: center;
+    font-size: 16px;
 }
 
 /* Стили для кнопок */
@@ -83,7 +84,7 @@ h2,
 h3,
 h4,
 h5,
-
+th,
 .saver,
 .resetter {
     color: #43d6fe;
