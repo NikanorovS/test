@@ -38,7 +38,8 @@ body {
     /* Темный фон */
     color: #fff;
     /* Белый текст */
-    background-image: url('background.svg');
+    /*background-image: url('background.svg');*/
+    background-image: linear-gradient(to right, #3f4753, #39414b, #363d44, #2a2d33);
     /* Ссылка на SVG фон */
     background-size: cover;
 }
@@ -85,7 +86,16 @@ h5,
 h6,
 .saver,
 .resetter {
-    color: black;
+    color: #43d6fe;
+    font-weight: 600;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-primary,  
+p {
+    
+    font-size: 12px;
 }
 
 body .container h2 {
