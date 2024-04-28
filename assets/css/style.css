@@ -132,3 +132,9 @@ h2 {
 #total, #totalCell, #averagePrice {
     padding: 10px;
 }
+
+.version {
+    color: #43d6fe;
+    font-size: 11px;
+    text-align: right;
+}
