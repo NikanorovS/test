@@ -7,18 +7,27 @@
     <title>Калькулятор заказов</title>
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="shortcut icon"
-        href="./assets/icon/pngwing.com.png"
-        type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/icon/pngwing.com.png" type="image/x-icon">
 </head>
 
 <body>
     <div class="container">
-        <p class="version">v.2.0<br/>G0ic0gLs</p>
-        <h2>Заказы</h2>
+        <p class="version">v.2.0<br />G0ic0gLs</p>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <h2>Заказы</h2>
+            <!-- Блок календаря -->
+            <div id="calendar-container">
+                <div id="calendar-header">
+                    <button id="prev-month" class="calendar-btn">←</button>
+                    <span id="current-month"></span>
+                    <button id="next-month" class="calendar-btn">→</button>
+                </div>
+                <div id="calendar" class="calendar-grid"></div>
+            </div>
+        </div>
         <p id="currentDate">Текущая дата: </p>
         <hr>
-        <!-- Оставляем таблицу без изменений -->
+        <!-- Оставляем вашу таблицу без изменений -->
         <table class="table table-hover table-striped table-dark table-bordered table-sm">
             <thead>
                 <tr class="table-dark">
@@ -45,7 +54,6 @@
         <h6 id="total"></h6>
         <h6 id="totalCell" class="flash"></h6>
         <h6 id="averagePrice"></h6>
-        <!-- Добавляем новые кнопки для экспорта в CSV и Excel -->
         <button class="btn saver btn-primary" onclick="downloadScreenshot()">Сохранить и скачать</button>
         <button class="btn resetter btn-secondary" onclick="resetData()">Сбросить данные</button>
         <button class="btn btn-primary" onclick="exportToCSV()">Экспорт в CSV</button>
@@ -55,6 +63,7 @@
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/calendar.js"></script>
 </body>
 
 </html>

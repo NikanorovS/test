@@ -138,3 +138,59 @@ h2 {
     font-size: 11px;
     text-align: right;
 }
+
+/* Календарь */
+#calendar-container {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    max-width: 300px;
+    margin-left: 20px;
+}
+
+#calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-btn {
+    background-color: #43d6fe;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.calendar-btn:hover {
+    background-color: #37b3cf;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-grid div {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #464646;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #2a2d33;
+    color: #fff;
+}
+
+.calendar-grid .today {
+    background-color: #ffd333;
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(255, 211, 51, 0.8);
+}
+
+.calendar-grid .empty {
+    visibility: hidden;
+}
